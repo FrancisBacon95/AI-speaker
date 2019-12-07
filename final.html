@@ -1,0 +1,150 @@
+<html xmlns = "http://www.w3.org/1999/xhtml">
+<head>
+	<title>3번문제</title>
+	<script type = "text/javascript">
+
+		var q = new Array( 100 );
+		var a1 = new Array( 100 );
+		var a2 = new Array( 100 );
+		var a3 = new Array( 100 );
+		var a4 = new Array( 100 );
+		var ans = new Array( 100 );
+		var qw = new Array ( 100 );
+		var count = 0;
+		var mnum = 0;
+		var mode = 0;
+
+		function init() {
+
+				document.getElementById( "mode" ).innerHTML = (count+1) + "번 문제 입력";
+				document.getElementById( "ques." ).value = "";
+				document.getElementById( "ans_1" ).value = "";
+				document.getElementById( "ans_2" ).value = "";
+				document.getElementById( "ans_3" ).value = "";
+				document.getElementById( "ans_4" ).value = "";
+				document.getElementById( "ans." ).value = "";
+				document.getElementById( "information" ).value = "";
+				document.getElementById( "list" ).value = "";
+				document.getElementById( "numbermodify" ).value = "";
+				document.getElementById( "mode" ).innerHTML = ""
+
+
+			if (mode == 2)
+			{
+				document.getElementById( "ques." ).value = q[(mnum-1)];
+				document.getElementById( "ans_1" ).value = a1[(mnum-1)];
+				document.getElementById( "ans_2" ).value = a2[(mnum-1)];
+				document.getElementById( "ans_3" ).value = a3[(mnum-1)];
+				document.getElementById( "ans_4" ).value = a4[(mnum-1)];
+				document.getElementById( "ans." ).value = ans[(mnum-1)];
+				document.getElementById( "information" ).value = qw[(mnum-1)];
+				document.getElementById( "list" ).value = "";
+				document.getElementById( "mode" ).innerHTML = mnum + "번 문제 수정";
+
+			}
+
+			if(mode == 1)
+				document.getElementById("insertq").style.display="none";
+			else
+				document.getElementById("insertq").style.display="";
+			
+			if(count > 0)
+			{
+				var temp = "";
+				for (var i = 0; i < count; i++)
+				{
+					temp += q[i] + "<br>" +
+					       a1[i] + "<br>" +
+					       a2[i] + "<br>" +
+					       a3[i] + "<br>" +
+					       a4[i] + "<br><br>" +
+					       qw[i] + "<br>";
+
+					if(mode != 1)
+						temp += ans[i] + "<br><br>";
+					else temp += "<br><br>";
+
+				}
+
+				if(mode == 1)
+				{
+					temp += "<input type = \"button\" value = \"문제입력\" onclick = \"insertmode()\" />";
+				}
+
+				document.getElementById("list").innerHTML = temp;
+			}
+		}
+
+		function insert() {
+			if(mode == 2)
+			{
+				q[(mnum-1)] = document.getElementById( "ques." ).value;
+				a1[(mnum-1)] = document.getElementById( "ans_1" ).value;
+				a2[(mnum-1)] = document.getElementById( "ans_2" ).value;
+				a3[(mnum-1)] = document.getElementById( "ans_3" ).value;
+				a4[(mnum-1)] = document.getElementById( "ans_4" ).value;
+				ans[(mnum-1)] = document.getElementById( "ans." ).value;
+				qw[(mnum-1)] = document.getElementById( "information" ).value;
+				mode = 0;
+				init();
+			}
+			else
+			{
+				q[count] = document.getElementById( "ques." ).value;
+				a1[count] = document.getElementById( "ans_1" ).value;
+				a2[count] = document.getElementById( "ans_2" ).value;
+				a3[count] = document.getElementById( "ans_3" ).value;
+				a4[count] = document.getElementById( "ans_4" ).value;
+				ans[count] = document.getElementById( "ans." ).value;
+				qw[count] = document.getElementById( "information" ).value;
+				count++;
+				init();
+			}
+		}
+
+		function solve() {
+			mode = 1;
+			init();
+		}
+		function insertmode() {
+			mode = 0;
+			init();
+		}
+
+		function modify() {
+			mnum = document.getElementById("numbermodify").value;
+			mode = 2;
+			init();
+		}
+
+
+	
+	</script>
+
+	</head>
+
+	<body onload = "init()">
+            <form action="">
+                    <div id="insertq"><div id="mode"></div>
+                    정보를 입력하세요.<br>
+                    <br>전화번호1 : <input id="ques." type = "text" size = "15"><br>
+                    전화번호2 : <input id="ans_1" type = "text" size = "15"><br>
+                    전화번호3 : <input id="ans_2" type = "text" size = "15"><br>
+                    점심 시간 : <input id="ans_3" type = "text" size = "4">
+                    분 : <input id="ans_4" type = "text" size = "4"><br>
+                    저녁 시간 : <input id="ans." type = "text" size = "4">
+                    분 : <input id="information" type = "text" size = "4"><br>
+                    <input type = "button" value="입력" onclick="insert()"><br><br>
+        
+                    <input id="numbermodify" type = "text" size = "4"style="display:none">
+        
+                    <input type = "button" value="수정하기" onclick="modify()"style="display:none"><br><br>
+                    <input type = "button" value="문제보기" onclick="solve()"style="display:none">
+                    </div>
+                    
+                    <br><br>
+                    <div id="list" style="color: white;"></div>
+            </form>
+	</form>
+	</body>
+</html>
